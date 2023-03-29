@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 <body>
+    <!--Jumbotron with app title-->
     <div class="jumbotron jumbotron-fluid bg-primary text-white">
         <div class="container text-center">
           <h1 class="display-4">Weather Dashboard</h1>
@@ -24,13 +25,14 @@
     </div>
     <div class="container-fluid text-center">
         <div class="row">
+            <!--Container with side bar for search and search history-->
           <div class="col-3 text-start fs-3 fw-bold">
             <form>
                 <div class="form-group justify-content-start">
-                  <label for="formGroupExampleInput">Search for a City:</label>
-                  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Dallas">
+                  <label for="cityInput">Search for a City:</label>
+                  <input type="text" class="form-control" id="cityInput" placeholder="Dallas">
                   <div class="d-grid gap-2 my-2">
-                    <button class="btn btn-primary" type="button">Search</button>
+                    <button class="btn btn-primary" type="button" id="searchButton">Search</button>
                   </div>
                   <hr>
                   <div class="d-grid gap-2 my-2">
@@ -42,69 +44,71 @@
           <div class="col-9">
             <div class="row my-2">
                 <div class="col">
+                    <!--Card for today's weather-->
                     <div class="card border border-3 border-dark">
                         <div class="card-body">
-                          <h5 class="card-title text-start" id="todayCity">Dallas <span id="todayDate"></span><span id="todayIcon">&#x1F324</span></h5>
-                          <p class="card-text text-start" id="todayTemp">Temp: <span></span>&#8457</p>
-                          <p class="card-text text-start" id="todayWind">Wind: <span></span> MPH</p>
-                          <p class="card-text text-start" id="todayHumidity">Humidity: <span></span> %</p>
+                          <h5 class="card-title text-start"><span id="city"></span> (<span id="todayDate"></span>) <img id="todayIcon" src=""></h5>
+                          <p class="card-text text-start">Temp: <span id="todayTemp"></span>&#8457</p>
+                          <p class="card-text text-start">Wind: <span id="todayWind"></span> MPH</p>
+                          <p class="card-text text-start">Humidity: <span id="todayHumidity"></span> %</p>
                         </div>
                       </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
+                    <!--Cards for future forecast-->
                     <div class="card futureForecast">
-                        <div class="card-body">
-                          <h5 class="card-title text-start" id="secondDate">Date</h5>
-                          <p class="card-text text-start" id="secondIcon">&#9728</p>
-                          <p class="card-text text-start" id="secondTemp">Temp: <span></span>&#8457</p>
-                          <p class="card-text text-start" id="secondWind">Wind: <span></span> MPH</p>
-                          <p class="card-text text-start" id="secondHumidity">Humidity: <span></span> %</p>
+                        <div class="card-body p-1">
+                          <h6 class="card-title text-start" id="secondDate"></h6>
+                          <img class="card-text" id="secondIcon" src="">
+                          <p class="card-text text-start">Temp: <span id="secondTemp"></span>&#8457</p>
+                          <p class="card-text text-start">Wind: <span id="secondWind"></span> MPH</p>
+                          <p class="card-text text-start">Humidity: <span id="secondHumidity"></span> %</p>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card futureForecast">
-                        <div class="card-body">
-                          <h5 class="card-title text-start" id="thirdTitle">Date</h5>
-                          <p class="card-text text-start" id="thirdIcon">&#x1F325</p>
-                          <p class="card-text text-start" id="thirdTemp">Temp: <span></span>&#8457</p>
-                          <p class="card-text text-start" id="thirdWind">Wind: <span></span> MPH</p>
-                          <p class="card-text text-start" id="thirdHumidity">Humidity: <span></span> %</p>
+                        <div class="card-body p-1">
+                          <h6 class="card-title text-start" id="thirdDate"></h6>
+                          <img class="card-text" id="thirdIcon" src="">
+                          <p class="card-text text-start">Temp: <span id="thirdTemp"></span>&#8457</p>
+                          <p class="card-text text-start">Wind: <span id="thirdWind"></span> MPH</p>
+                          <p class="card-text text-start">Humidity: <span id="thirdHumidity"></span> %</p>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card futureForecast">
-                        <div class="card-body">
-                          <h5 class="card-title text-start" id="fourthTitle">Date</h5>
-                          <p class="card-text text-start" id="fourthIcon">&#x1F326</p>
-                          <p class="card-text text-start" id="fourthTemp">Temp: <span></span>&#8457</p>
-                          <p class="card-text text-start" id="fourthWind">Wind: <span></span> MPH</p>
-                          <p class="card-text text-start" id="fourthHumidity">Humidity: <span></span> %</p>
+                        <div class="card-body p-1">
+                          <h6 class="card-title text-start" id="fourthDate"></h6>
+                          <img class="card-text" id="fourthIcon" src="">
+                          <p class="card-text text-start">Temp: <span id="fourthTemp"></span>&#8457</p>
+                          <p class="card-text text-start">Wind: <span id="fourthWind"></span> MPH</p>
+                          <p class="card-text text-start">Humidity: <span id="fourthHumidity"></span> %</p>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card futureForecast">
-                        <div class="card-body">
-                          <h5 class="card-title text-start" id="fifthTitle">Date</h5>
-                          <p class="card-text text-start" id="fifthIcon">&#x1F327</p>
-                          <p class="card-text text-start" id="fifthTemp">Temp: <span></span>&#8457</p>
-                          <p class="card-text text-start" id="fifthWind">Wind: <span></span> MPH</p>
-                          <p class="card-text text-start" id="fifthHumidity">Humidity: <span></span> %</p>
+                        <div class="card-body p-1">
+                          <h6 class="card-title text-start" id="fifthDate"></h6>
+                          <img class="card-text" id="fifthIcon" src="">
+                          <p class="card-text text-start">Temp: <span id="fifthTemp"></span>&#8457</p>
+                          <p class="card-text text-start">Wind: <span id="fifthWind"></span> MPH</p>
+                          <p class="card-text text-start">Humidity: <span id="fifthHumidity"></span> %</p>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card futureForecast">
-                        <div class="card-body">
-                          <h5 class="card-title text-start" id="sixthTitle">Date</h5>
-                          <p class="card-text text-start" id="sixthIcon">&#x1F329</p>
-                          <p class="card-text text-start" id="sixthTemp">Temp: <span></span>&#8457</p>
-                          <p class="card-text text-start" id="sixthWind">Wind: <span></span> MPH</p>
-                          <p class="card-text text-start" id="sixthHumidity">Humidity: <span></span> %</p>
+                        <div class="card-body p-1">
+                          <h6 class="card-title text-start" id="sixthDate"></h6>
+                          <img class="card-text text-start" id="sixthIcon" src="">
+                          <p class="card-text text-start">Temp: <span id="sixthTemp"></span>&#8457</p>
+                          <p class="card-text text-start">Wind: <span id="sixthWind"></span> MPH</p>
+                          <p class="card-text text-start">Humidity: <span id="sixthHumidity"></span> %</p>
                         </div>
                     </div>
                 </div>

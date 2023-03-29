@@ -24,28 +24,90 @@
     </div>
     <div class="container-fluid text-center">
         <div class="row">
-          <div class="col-4 text-start fs-3 fw-bold">
+          <div class="col-3 text-start fs-3 fw-bold">
             <form>
                 <div class="form-group justify-content-start">
                   <label for="formGroupExampleInput">Search for a City:</label>
                   <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Dallas">
-                  <div class="d-grid gap-2 mt-4">
+                  <div class="d-grid gap-2 my-2">
                     <button class="btn btn-primary" type="button">Search</button>
-                    <hr>
+                  </div>
+                  <hr>
+                  <div class="d-grid gap-2 my-2">
+                    <button class="btn btn-secondary" type="button">Dallas</button>
                   </div>
                 </div>
               </form>
           </div>
-          <div class="col-8">
-            <div class="row">
-                <div class="col">Today's Weather</div>
+          <div class="col-9">
+            <div class="row my-2">
+                <div class="col">
+                    <div class="card ">
+                        <div class="card-body">
+                          <h5 class="card-title text-start" id="todayCity">Dallas <span id="todayDate"></span><span id="todayIcon">&#x1F324</span></h5>
+                          <p class="card-text text-start" id="todayTemp">Temp: <span></span>&#8457</p>
+                          <p class="card-text text-start" id="todayWind">Wind: <span></span> MPH</p>
+                          <p class="card-text text-start" id="todayHumidity">Humidity: <span></span> %</p>
+                        </div>
+                      </div>
+                </div>
             </div>
             <div class="row">
-                <div class="col">Tomorrow</div>
-                <div class="col">Day 3</div>
-                <div class="col">Day 4</div>
-                <div class="col">Day 5</div>
-                <div class="col">Day 6</div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-start" id="secondDate">Date</h5>
+                          <p class="card-text text-start" id="secondIcon">&#9728</p>
+                          <p class="card-text text-start" id="secondTemp">Temp: <span></span>&#8457</p>
+                          <p class="card-text text-start" id="secondWind">Wind: <span></span> MPH</p>
+                          <p class="card-text text-start" id="secondHumidity">Humidity: <span></span> %</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-start" id="thirdTitle">Date</h5>
+                          <p class="card-text text-start" id="thirdIcon">&#x1F325</p>
+                          <p class="card-text text-start" id="thirdTemp">Temp: <span></span>&#8457</p>
+                          <p class="card-text text-start" id="thirdWind">Wind: <span></span> MPH</p>
+                          <p class="card-text text-start" id="thirdHumidity">Humidity: <span></span> %</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-start" id="fourthTitle">Date</h5>
+                          <p class="card-text text-start" id="fourthIcon">&#x1F326</p>
+                          <p class="card-text text-start" id="fourthTemp">Temp: <span></span>&#8457</p>
+                          <p class="card-text text-start" id="fourthWind">Wind: <span></span> MPH</p>
+                          <p class="card-text text-start" id="fourthHumidity">Humidity: <span></span> %</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-start" id="fifthTitle">Date</h5>
+                          <p class="card-text text-start" id="fifthIcon">&#x1F327</p>
+                          <p class="card-text text-start" id="fifthTemp">Temp: <span></span>&#8457</p>
+                          <p class="card-text text-start" id="fifthWind">Wind: <span></span> MPH</p>
+                          <p class="card-text text-start" id="fifthHumidity">Humidity: <span></span> %</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title text-start" id="sixthTitle">Date</h5>
+                          <p class="card-text text-start" id="sixthIcon">&#x1F329</p>
+                          <p class="card-text text-start" id="sixthTemp">Temp: <span></span>&#8457</p>
+                          <p class="card-text text-start" id="sixthWind">Wind: <span></span> MPH</p>
+                          <p class="card-text text-start" id="sixthHumidity">Humidity: <span></span> %</p>
+                        </div>
+                    </div>
+                </div>
             </div>
           </div>
         </div>

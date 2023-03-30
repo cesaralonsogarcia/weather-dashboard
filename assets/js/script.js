@@ -1,5 +1,7 @@
 var cityInput = $('#cityInput');
 var searchButton = $('#searchButton');
+var searchList = $('#searchList');
+var searchListButtons = $('#searchList > button');
 var city = $('#city');
 var todayDate = $('#todayDate');
 var todayIcon = $('#todayIcon');
@@ -39,15 +41,17 @@ var fourthDateDisplay = dayjs().add(3, 'day').format('MM/DD/YYYY');
 var fifthDateDisplay = dayjs().add(4, 'day').format('MM/DD/YYYY');
 var sixthDateDisplay = dayjs().add(5, 'day').format('MM/DD/YYYY');
 
-var cityFromUser;
+var cityFromUser = 'Dallas';
 var cityLat;
 var cityLon;
 var weatherAPIKey = 'ee1e324da2fdf212344dc0dfc23a3390'
-var geocodingAPIUrl;
+var geocodingAPIUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityFromUser + '&limit=1&appid=' + weatherAPIKey;
 var weatherAPIUrl;
 var iconUrl;
 var cityHistoryString = '';
 var cityHistory = [];
+var searchListButtonHTML = '<button class="btn btn-secondary" type="button">';
+var buttonEndTagHTML = '</button>';
 
 // Ensure the code is not run until the browser has finished rendering
 $(function() {
@@ -60,27 +64,42 @@ $(function() {
     sixthDate.text(sixthDateDisplay);
 
     getCityHistory();
-
-    // Get data for current city
+    displaySearchHistory();
+    
+    // Use Dallas as default to display the first set of data
+    getWeatherData();
 
     // Event listener for search button
     searchButton.click(function() {
         cityFromUser = cityInput.val();
         geocodingAPIUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityFromUser + '&limit=1&appid=' + weatherAPIKey;
-        // Get data from API
-        fetch(geocodingAPIUrl)
+        getWeatherData();
+        saveToCityHistory();
+        getCityHistory();
+        displaySearchHistory();
+    });
+    
+    // Event listener for buttons from search history
+    searchListButtons.click(function () {
+        cityFromUser = $(this).text();
+        geocodingAPIUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityFromUser + '&limit=1&appid=' + weatherAPIKey;
+        getWeatherData();
+    })
+});
+
+// This function get the data from the API
+function getWeatherData() {
+    fetch(geocodingAPIUrl)
             .then(function (response) {
                 return response.json();
             })
             .then(function (data) {
                 // Save latitude and longitude for city
-                saveToCityHistory();
-                console.log(data);
+                //saveToCityHistory();
                 city.text(data[0].name);
                 cityLat = data[0].lat;
                 cityLon = data[0].lon;
                 weatherAPIUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + cityLat + '&lon=' + cityLon + '&appid=' + weatherAPIKey + '&units=imperial';
-                console.log(weatherAPIUrl);
                 // Nested fetch to get weather after getting latitude and longitude
                 fetch(weatherAPIUrl)
                     .then(function (response) {
@@ -91,8 +110,7 @@ $(function() {
                         renderData(data);
                     });
             });
-    });  
-});
+}
 
 // This function renders the data from the API to the screen
 function renderData(data) {
@@ -134,11 +152,21 @@ function getCityHistory() {
     if (cityHistoryString !== null) {
         cityHistory = JSON.parse(cityHistoryString);
     }
-    console.log(cityHistory);
 }
 
 // This function saves the city input from the user to local storage
 function saveToCityHistory() {
     cityHistory.push(cityFromUser);
     localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
+}
+
+// This function displays the buttons from the search history
+function displaySearchHistory() {
+    searchList.text('');
+    if (cityHistoryString !== null) {
+        for (var i = 0; i < cityHistory.length; i++) {
+            searchList.append(searchListButtonHTML + cityHistory[i] + buttonEndTagHTML);
+        }
+    }
+    searchListButtons = $('#searchList > button');
 }

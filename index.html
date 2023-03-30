@@ -1,120 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
+
 <body>
-    <!--Jumbotron with app title-->
-    <div class="jumbotron jumbotron-fluid bg-primary text-white">
-        <div class="container text-center">
-          <h1 class="display-4">Weather Dashboard</h1>
-        </div>
+  <!--Jumbotron with app title-->
+  <div class="jumbotron jumbotron-fluid bg-primary text-white">
+    <div class="container text-center">
+      <h1 class="display-4">Weather Dashboard</h1>
     </div>
-    <div class="container-fluid text-center">
-        <div class="row">
-            <!--Container with side bar for search and search history-->
-          <div class="col-3 text-start fs-3 fw-bold">
-            <form>
-                <div class="form-group justify-content-start">
-                  <label for="cityInput">Search for a City:</label>
-                  <input type="text" class="form-control" id="cityInput" placeholder="Dallas">
-                  <div class="d-grid gap-2 my-2">
-                    <button class="btn btn-primary" type="button" id="searchButton">Search</button>
-                  </div>
-                  <hr>
-                  <div class="d-grid gap-2 my-2" id="searchList">
-                  </div>
-                </div>
-              </form>
-          </div>
-          <div class="col-9">
-            <div class="row my-2">
-                <div class="col">
-                    <!--Card for today's weather-->
-                    <div class="card border border-3 border-dark">
-                        <div class="card-body">
-                          <h5 class="card-title text-start"><span id="city"></span> (<span id="todayDate"></span>) <img id="todayIcon" src=""></h5>
-                          <p class="card-text text-start">Temp: <span id="todayTemp"></span>&#8457</p>
-                          <p class="card-text text-start">Wind: <span id="todayWind"></span> MPH</p>
-                          <p class="card-text text-start">Humidity: <span id="todayHumidity"></span> %</p>
-                        </div>
-                      </div>
-                </div>
+  </div>
+  <div class="container-fluid text-center">
+    <div class="row">
+      <!--Container with side bar for search and search history-->
+      <div class="col-3 text-start fs-4 fw-bold">
+        <form>
+          <div class="form-group justify-content-start">
+            <label for="cityInput">Search for a City:</label>
+            <input type="text" class="form-control" id="cityInput" placeholder="New York">
+            <div class="d-grid gap-2 my-2">
+              <button class="btn btn-primary" type="button" id="searchButton">Search</button>
             </div>
-            <div class="row">
-                <div class="col">
-                    <!--Cards for future forecast-->
-                    <div class="card futureForecast">
-                        <div class="card-body p-1">
-                          <h6 class="card-title text-start" id="secondDate"></h6>
-                          <img class="card-text" id="secondIcon" src="">
-                          <p class="card-text text-start">Temp: <span id="secondTemp"></span>&#8457</p>
-                          <p class="card-text text-start">Wind: <span id="secondWind"></span> MPH</p>
-                          <p class="card-text text-start">Humidity: <span id="secondHumidity"></span> %</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card futureForecast">
-                        <div class="card-body p-1">
-                          <h6 class="card-title text-start" id="thirdDate"></h6>
-                          <img class="card-text" id="thirdIcon" src="">
-                          <p class="card-text text-start">Temp: <span id="thirdTemp"></span>&#8457</p>
-                          <p class="card-text text-start">Wind: <span id="thirdWind"></span> MPH</p>
-                          <p class="card-text text-start">Humidity: <span id="thirdHumidity"></span> %</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card futureForecast">
-                        <div class="card-body p-1">
-                          <h6 class="card-title text-start" id="fourthDate"></h6>
-                          <img class="card-text" id="fourthIcon" src="">
-                          <p class="card-text text-start">Temp: <span id="fourthTemp"></span>&#8457</p>
-                          <p class="card-text text-start">Wind: <span id="fourthWind"></span> MPH</p>
-                          <p class="card-text text-start">Humidity: <span id="fourthHumidity"></span> %</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card futureForecast">
-                        <div class="card-body p-1">
-                          <h6 class="card-title text-start" id="fifthDate"></h6>
-                          <img class="card-text" id="fifthIcon" src="">
-                          <p class="card-text text-start">Temp: <span id="fifthTemp"></span>&#8457</p>
-                          <p class="card-text text-start">Wind: <span id="fifthWind"></span> MPH</p>
-                          <p class="card-text text-start">Humidity: <span id="fifthHumidity"></span> %</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card futureForecast">
-                        <div class="card-body p-1">
-                          <h6 class="card-title text-start" id="sixthDate"></h6>
-                          <img class="card-text text-start" id="sixthIcon" src="">
-                          <p class="card-text text-start">Temp: <span id="sixthTemp"></span>&#8457</p>
-                          <p class="card-text text-start">Wind: <span id="sixthWind"></span> MPH</p>
-                          <p class="card-text text-start">Humidity: <span id="sixthHumidity"></span> %</p>
-                        </div>
-                    </div>
-                </div>
+            <hr>
+            <div class="d-grid gap-2 my-2" id="searchList">
+              <!--The new search buttons will be added here using JavaScript-->
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-9">
+        <div class="row my-2">
+          <div class="col">
+            <!--Card for today's weather-->
+            <div class="card border border-3 border-dark rounded-0">
+              <div class="card-body">
+                <h5 class="card-title text-start"><span id="city"></span> (<span id="todayDate"></span>) <img
+                    id="todayIcon" src=""></h5>
+                <p class="card-text text-start">Temp: <span id="todayTemp"></span>&#8457</p>
+                <p class="card-text text-start">Wind: <span id="todayWind"></span> MPH</p>
+                <p class="card-text text-start">Humidity: <span id="todayHumidity"></span> %</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!--Cards for future forecast-->
+          <div class="col">
+            <div class="card rounded-0 futureForecast">
+              <div class="card-body p-1">
+                <h6 class="card-title text-start" id="secondDate"></h6>
+                <img class="card-text" id="secondIcon" src="">
+                <p class="card-text text-start">Temp: <span id="secondTemp"></span>&#8457</p>
+                <p class="card-text text-start">Wind: <span id="secondWind"></span> MPH</p>
+                <p class="card-text text-start">Humidity: <span id="secondHumidity"></span> %</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card rounded-0 futureForecast">
+              <div class="card-body p-1">
+                <h6 class="card-title text-start" id="thirdDate"></h6>
+                <img class="card-text" id="thirdIcon" src="">
+                <p class="card-text text-start">Temp: <span id="thirdTemp"></span>&#8457</p>
+                <p class="card-text text-start">Wind: <span id="thirdWind"></span> MPH</p>
+                <p class="card-text text-start">Humidity: <span id="thirdHumidity"></span> %</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card rounded-0 futureForecast">
+              <div class="card-body p-1">
+                <h6 class="card-title text-start" id="fourthDate"></h6>
+                <img class="card-text" id="fourthIcon" src="">
+                <p class="card-text text-start">Temp: <span id="fourthTemp"></span>&#8457</p>
+                <p class="card-text text-start">Wind: <span id="fourthWind"></span> MPH</p>
+                <p class="card-text text-start">Humidity: <span id="fourthHumidity"></span> %</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card rounded-0 futureForecast">
+              <div class="card-body p-1">
+                <h6 class="card-title text-start" id="fifthDate"></h6>
+                <img class="card-text" id="fifthIcon" src="">
+                <p class="card-text text-start">Temp: <span id="fifthTemp"></span>&#8457</p>
+                <p class="card-text text-start">Wind: <span id="fifthWind"></span> MPH</p>
+                <p class="card-text text-start">Humidity: <span id="fifthHumidity"></span> %</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card rounded-0 futureForecast">
+              <div class="card-body p-1">
+                <h6 class="card-title text-start" id="sixthDate"></h6>
+                <img class="card-text text-start" id="sixthIcon" src="">
+                <p class="card-text text-start">Temp: <span id="sixthTemp"></span>&#8457</p>
+                <p class="card-text text-start">Wind: <span id="sixthWind"></span> MPH</p>
+                <p class="card-text text-start">Humidity: <span id="sixthHumidity"></span> %</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    <script src="./assets/js/script.js"></script>
+    </div>
+  </div>
+  <script src="./assets/js/script.js"></script>
 </body>
+
 </html>

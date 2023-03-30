@@ -54,7 +54,7 @@ var searchListButtonHTML = '<button class="btn btn-secondary" type="button">';
 var buttonEndTagHTML = '</button>';
 
 // Ensure the code is not run until the browser has finished rendering
-$(function() {
+$(function () {
     // Render dates on screen
     todayDate.text(dateDisplay);
     secondDate.text(secondDateDisplay);
@@ -65,20 +65,26 @@ $(function() {
 
     getCityHistory();
     displaySearchHistory();
-    
+
     // Use Dallas as default to display the first set of data
     getWeatherData();
 
     // Event listener for search button
-    searchButton.click(function() {
+    searchButton.click(function () {
         cityFromUser = cityInput.val();
         geocodingAPIUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityFromUser + '&limit=1&appid=' + weatherAPIKey;
         getWeatherData();
         saveToCityHistory();
         getCityHistory();
         displaySearchHistory();
+        // Event listener for buttons from search history before reloading the page
+        searchListButtons.click(function () {
+            cityFromUser = $(this).text();
+            geocodingAPIUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityFromUser + '&limit=1&appid=' + weatherAPIKey;
+            getWeatherData();
+        })
     });
-    
+
     // Event listener for buttons from search history
     searchListButtons.click(function () {
         cityFromUser = $(this).text();
@@ -90,26 +96,25 @@ $(function() {
 // This function get the data from the API
 function getWeatherData() {
     fetch(geocodingAPIUrl)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
-                // Save latitude and longitude for city
-                //saveToCityHistory();
-                city.text(data[0].name);
-                cityLat = data[0].lat;
-                cityLon = data[0].lon;
-                weatherAPIUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + cityLat + '&lon=' + cityLon + '&appid=' + weatherAPIKey + '&units=imperial';
-                // Nested fetch to get weather after getting latitude and longitude
-                fetch(weatherAPIUrl)
-                    .then(function (response) {
-                        return response.json();
-                    })
-                    .then(function (data) {
-                        // Render data to screen
-                        renderData(data);
-                    });
-            });
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            // Save latitude and longitude for city
+            city.text(data[0].name);
+            cityLat = data[0].lat;
+            cityLon = data[0].lon;
+            weatherAPIUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + cityLat + '&lon=' + cityLon + '&appid=' + weatherAPIKey + '&units=imperial';
+            // Nested fetch to get weather after getting latitude and longitude
+            fetch(weatherAPIUrl)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    // Render data to screen
+                    renderData(data);
+                });
+        });
 }
 
 // This function renders the data from the API to the screen
@@ -166,6 +171,7 @@ function displaySearchHistory() {
     if (cityHistoryString !== null) {
         for (var i = 0; i < cityHistory.length; i++) {
             searchList.append(searchListButtonHTML + cityHistory[i] + buttonEndTagHTML);
+            searchListButtons = $('#searchList > button');
         }
     }
     searchListButtons = $('#searchList > button');

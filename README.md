@@ -26,6 +26,8 @@ THEN I am again presented with current and future conditions for that city
 
 ## Application Screenshot
 
-![Weather Dashboard Screenshot]()
+![Weather Dashboard Screenshot](https://github.com/cesaralonsogarcia/weather-dashboard/blob/main/assets/images/weather-dashboard.png)
 
 ## Deployed Application
+
+https://cesaralonsogarcia.github.io/weather-dashboard/
